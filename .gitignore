@@ -1,0 +1,13 @@
+# ignore directories
+__pycache__/
+env/
+
+# ignore files
+.env
+*.pyc
+
+*/.venv/
+
+*.xlsx
+*.sqlite3
+*env
