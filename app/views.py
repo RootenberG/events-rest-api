@@ -32,9 +32,6 @@ class Info(Resource):
         return response
 
 
-
-
-
 class Tmimeline(Resource):
     def get(self, d_type="usual", grouping="monthly", *filters) -> Response:
         args = request.args

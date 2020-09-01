@@ -5,7 +5,6 @@ import openpyxl
 
 
 from app import create_app, db, models
-from tests import test_app
 
 
 app = create_app()
@@ -30,10 +29,9 @@ def store_into_db() -> None:
     xlsx_file = Path("pydev_test_task_data2.xlsx")
     wb_obj = openpyxl.load_workbook(xlsx_file)
     wsheet = wb_obj.active
-    i=0
+
     for row in wsheet.iter_rows(min_row=2):  # skip 1st row
         asin, brand, id, source, stars, timestamp = [cell.value for cell in row]
-        
         record = models.Event(
             asin=asin,
             brand=brand,
@@ -43,8 +41,6 @@ def store_into_db() -> None:
             timestamp=timestamp,
         )
         db.session.add(record)
-        print(i)
-        i+=1
         db.session.commit()
 
 

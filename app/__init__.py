@@ -11,7 +11,7 @@ login_manager = LoginManager()
 db = SQLAlchemy()
 
 
-def create_app(environment='development'):
+def create_app(environment="development"):
 
     from config import config
     from .views import Info
@@ -21,7 +21,7 @@ def create_app(environment='development'):
     app = Flask(__name__)
     api = Api(app)
     # Set app config.
-    env = os.environ.get('FLASK_ENV', environment)
+    env = os.environ.get("FLASK_ENV", environment)
     app.config.from_object(config[env])
     config[env].configure(app)
 
@@ -30,15 +30,7 @@ def create_app(environment='development'):
     login_manager.init_app(app)
 
     # Register resources
-    api.add_resource(Info, '/api/info')
-    api.add_resource(Tmimeline, '/api/timeline')
-
-
-
-
-    # Error handlers.
-    @app.errorhandler(HTTPException)
-    def handle_http_error(exc):
-        return render_template('error.html', error=exc), exc.code
+    api.add_resource(Info, "/api/info")
+    api.add_resource(Tmimeline, "/api/timeline")
 
     return app
